@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import "./App.css";
 import { socket } from "./socket";
 import axios from "axios";
+import MainRoutes from "routes/mainRoutes";
 
 function App() {
   useEffect(() => {
@@ -30,7 +31,9 @@ function App() {
   };
   return (
     <div className="App">
-      <button onClick={handleBtn}>Update</button>
+      <Suspense fallback={<div>Loading...</div>}>
+        <MainRoutes />
+      </Suspense>
     </div>
   );
 }
