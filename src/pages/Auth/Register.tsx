@@ -4,6 +4,7 @@ import { CustomButton } from "Layout/Button/Button.styles";
 import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
 import { theme } from "Utils/theme";
 import Styles from "styles/auth.module.scss";
+import API from "Utils/intercepter";
 
 interface Props {
   handleSwitch: () => void;
@@ -16,14 +17,20 @@ type FormDataType = {
   confirmPassword?: string;
 };
 const Register = ({ handleSwitch }: Props) => {
-  const [formData, setFormData] = useState<FormDataType>({} as FormDataType);
+  const [formData, setFormData] = useState<FormDataType>({
+    avatarId: 1,
+  } as FormDataType);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Password fields do not matches!");
     } else {
-      console.log(formData);
+      try {
+        const res = await API.post("/user/register", formData);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
