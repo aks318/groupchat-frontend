@@ -1,0 +1,21 @@
+@import "index.scss";
+
+.auth {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.authContainer {
+  flex: 1;
+  padding: 16px 12px;
+  background-color: mix($primaryBlue, White, 85%);
+  border-radius: 4px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

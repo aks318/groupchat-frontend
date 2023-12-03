@@ -1,11 +1,13 @@
 /* Background Color */
 /* Blue */
 $primaryBlue: #012a4a;
+$secondaryBlue: #013a63;
 
 // color
 // White
 $primaryWhite: #fff;
 
+html,
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -15,9 +17,56 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: $primaryBlue;
   color: $primaryWhite;
+  height: 100%;
+}
+
+body > #root {
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+// Small tablets and large smartphones (landscape view)
+$screen-xs-min: 0px;
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 600px;
+
+// Small tablets (portrait view)
+$screen-md-min: 900px;
+
+// Tablets and small desktops
+$screen-lg-min: 1200px;
+
+// Large tablets and desktops
+$screen-xl-min: 1536px;
+
+@mixin xs {
+  @media (min-width: #{$screen-xs-min}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
 }
