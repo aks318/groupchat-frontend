@@ -1,36 +1,24 @@
+import Footer from "Component/Footer";
 import { Suspense, useEffect } from "react";
-import { socket } from "./socket";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import MainRoutes from "routes/mainRoutes";
 
 function App() {
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Client Connected");
-    });
+  const { isLoggedIn } = useSelector((state: AppState) => state.authReducer);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    socket.on("message", (data) => {
-      console.log("data", data);
-    });
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/home");
+    } else navigate("/");
   }, []);
 
-  const handleBtn = async () => {
-    const headers = {
-      "Content-Type": "application/json",
-      "Socket-Id": `${socket.id}`,
-    };
-    console.log(socket.id);
-    await axios.post(
-      "http://localhost:5000/groupchat/user/updateSocket",
-      {},
-      {
-        headers: headers,
-      }
-    );
-  };
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <MainRoutes />
+      {location.pathname !== "/" ? <Footer /> : undefined}
     </Suspense>
   );
 }

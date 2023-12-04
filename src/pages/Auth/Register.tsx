@@ -11,6 +11,7 @@ import {
   SET_USER_DETAILS,
 } from "store/authReducer/authConstants";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   handleSwitch: () => void;
@@ -27,6 +28,7 @@ const Register = ({ handleSwitch }: Props) => {
     avatarId: 1,
   } as FormDataType);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,6 +50,7 @@ const Register = ({ handleSwitch }: Props) => {
             type: SET_USER_DETAILS,
             payload: res.data.data.userData,
           });
+          navigate("/home");
         }
       } catch (error) {
         console.log(error);

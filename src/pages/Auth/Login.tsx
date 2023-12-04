@@ -11,6 +11,7 @@ import {
   SET_LOGGED_IN,
   SET_USER_DETAILS,
 } from "store/authReducer/authConstants";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   handleSwitch: () => void;
@@ -24,6 +25,7 @@ type FormDataType = {
 const Login = ({ handleSwitch }: Props) => {
   const [formData, setFormData] = useState<FormDataType>({} as FormDataType);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (key: keyof FormDataType, value: string | number) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -46,6 +48,7 @@ const Login = ({ handleSwitch }: Props) => {
           type: SET_USER_DETAILS,
           payload: res.data.data.userData,
         });
+        navigate("/home");
       }
     } catch (error) {
       console.log(error);
