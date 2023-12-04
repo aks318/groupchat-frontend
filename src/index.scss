@@ -7,6 +7,9 @@ $secondaryBlue: #013a63;
 // White
 $primaryWhite: #fff;
 
+* {
+  box-sizing: border-box;
+}
 html,
 body {
   margin: 0;

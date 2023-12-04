@@ -1,5 +1,4 @@
 import { Suspense, useEffect } from "react";
-import "./App.css";
 import { socket } from "./socket";
 import axios from "axios";
 import MainRoutes from "routes/mainRoutes";

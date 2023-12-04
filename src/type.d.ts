@@ -1,8 +1,16 @@
+interface userDetailsType {
+  name: string;
+  avatarId: number;
+  username: string;
+  password: string;
+  socketid: string;
+}
+
 interface authStateType {
   isLoader: boolean;
   token: string;
   isLoggedIn: boolean;
-  userDetails: {};
+  userDetails: userDetailsType;
   message: {
     text: string;
     status: string;

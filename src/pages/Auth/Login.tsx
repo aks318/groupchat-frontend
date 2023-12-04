@@ -5,6 +5,12 @@ import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
 import { theme } from "Utils/theme";
 import Styles from "styles/auth.module.scss";
 import API from "Utils/intercepter";
+import { useDispatch } from "react-redux";
+import {
+  SET_AUTH_TOKEN,
+  SET_LOGGED_IN,
+  SET_USER_DETAILS,
+} from "store/authReducer/authConstants";
 
 interface Props {
   handleSwitch: () => void;
@@ -17,6 +23,7 @@ type FormDataType = {
 
 const Login = ({ handleSwitch }: Props) => {
   const [formData, setFormData] = useState<FormDataType>({} as FormDataType);
+  const dispatch = useDispatch();
 
   const handleChange = (key: keyof FormDataType, value: string | number) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -26,6 +33,20 @@ const Login = ({ handleSwitch }: Props) => {
     e.preventDefault();
     try {
       const res = await API.post("user/login", formData);
+      if (res.data.success) {
+        dispatch({
+          type: SET_AUTH_TOKEN,
+          payload: res.data.data.token,
+        });
+        dispatch({
+          type: SET_LOGGED_IN,
+          payload: true,
+        });
+        dispatch({
+          type: SET_USER_DETAILS,
+          payload: res.data.data.userData,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +88,7 @@ const Login = ({ handleSwitch }: Props) => {
       <Typography sx={{ mt: 1, textAlign: "center", fontSize: 14 }}>
         Not have an account?{" "}
         <span
-          style={{ color: theme.color.blue.tertiary }}
+          style={{ color: theme.color.blue.tertiary, cursor: "pointer" }}
           onClick={handleSwitch}
         >
           Register
