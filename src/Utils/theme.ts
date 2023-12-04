@@ -20,6 +20,7 @@ export const theme = {
     blue: {
       primary: "#012a4a",
       secondary: "#013a63",
+      tertiary: "#00b4d8",
     },
   },
   border: {

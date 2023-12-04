@@ -10,14 +10,14 @@ export const CustomButton = styled(Button).attrs(({ sx }) => ({
   color: ${({ variant }: CustomButtonProps) =>
     variant === "contained"
       ? theme.color.white.primary
-      : theme.color.blue.primary} !important;
+      : theme.color.blue.tertiary} !important;
   background-color: ${({ variant }: CustomButtonProps) =>
     variant === "contained" ? theme.bg.blue.secondary : ""} !important;
   border-radius: 4px;
-  border-color: ${theme.bg.blue.primary} !important;
+  border-color: ${theme.bg.white.primary} !important;
   &:hover {
     color: ${theme.color.white.primary} !important;
-    background-color: ${theme.bg.blue.secondary} !important;
+    background-color: ${theme.bg.blue.tertiary} !important;
     transition: all 0.3s ease-in;
   }
   &:disabled {

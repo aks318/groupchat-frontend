@@ -76,6 +76,7 @@ const Login = ({ handleSwitch }: Props) => {
           name="password"
           label="Password"
           placeholder="Password"
+          type="password"
           sx={{ width: "100%" }}
           inputProps={{
             minLength: 5,
