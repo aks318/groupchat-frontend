@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, IconButton } from "@mui/material";
+import { useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
+import { Box, IconButton, Typography } from "@mui/material";
+
 import DialogBox from "Layout/DialogBox/DialogBox";
-import NewGroup from "./NewGroup";
+import Home1 from "Images/home1.svg";
+
 import { theme } from "Utils/theme";
 import { getAllmygroup } from "../utils";
-import { useSelector } from "react-redux";
+import NewGroup from "./NewGroup";
 
 const MyGroup = () => {
   const { userDetails } = useSelector((state: AppState) => state.authReducer);
@@ -23,6 +26,27 @@ const MyGroup = () => {
   };
   return (
     <Box sx={{ flex: 1, position: "relative" }}>
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img src={Home1} alt="hero" />
+        <Typography
+          sx={{
+            color: theme.color.white.primary,
+            fontStyle: "italic",
+            textAlign: "center",
+            opacity: 0.8,
+          }}
+        >
+          You haven't created any group yet.
+        </Typography>
+      </Box>
       <IconButton
         onClick={handleDialogOpen}
         sx={{
