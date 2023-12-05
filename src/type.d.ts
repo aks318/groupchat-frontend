@@ -13,7 +13,7 @@ interface authStateType {
   userDetails: userDetailsType;
   message: {
     text: string;
-    status: string;
+    status: "success" | "error";
   };
 }
 

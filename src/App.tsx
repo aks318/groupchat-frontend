@@ -1,22 +1,43 @@
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { Box, Typography } from "@mui/material";
 import Footer from "Component/Footer";
 import useWindowSize from "hooks/useWindowSize ";
 import { Suspense, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import MainRoutes from "routes/mainRoutes";
+import { SET_MESSAGE } from "store/authReducer/authConstants";
 
 function App() {
   const windowSize = useWindowSize();
-  const { isLoggedIn } = useSelector((state: AppState) => state.authReducer);
+  const { isLoggedIn, message } = useSelector(
+    (state: AppState) => state.authReducer
+  );
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/home");
     } else navigate("/");
   }, []);
+
+  useEffect(() => {
+    if (message.text && message.status) {
+      toast[message.status](message.text, {
+        position: "top-right",
+      });
+      dispatch({
+        type: SET_MESSAGE,
+        payload: {
+          text: "",
+          status: "success",
+        },
+      });
+    }
+  }, [message]);
 
   if (windowSize.width > 600) {
     return (
@@ -36,12 +57,15 @@ function App() {
     );
   }
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <MainRoutes />
-      {location.pathname !== "/" && location.pathname !== "/auth" ? (
-        <Footer />
-      ) : undefined}
-    </Suspense>
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <MainRoutes />
+        {location.pathname !== "/" && location.pathname !== "/auth" ? (
+          <Footer />
+        ) : undefined}
+      </Suspense>
+      <ToastContainer />
+    </>
   );
 }
 

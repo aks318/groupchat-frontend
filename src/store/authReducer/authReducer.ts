@@ -2,6 +2,7 @@ import {
   CLEAR_AUTH_STATE,
   SET_AUTH_TOKEN,
   SET_LOGGED_IN,
+  SET_MESSAGE,
   SET_USER_DETAILS,
 } from "./authConstants";
 
@@ -27,7 +28,11 @@ const authReduce = (state = initialState, action: ActionType) => {
     case SET_USER_DETAILS: {
       return { ...state, userDetails: action.payload };
     }
+    case SET_MESSAGE: {
+      return { ...state, message: action.payload };
+    }
     case CLEAR_AUTH_STATE:
+      return initialState;
     default:
       return state;
   }
