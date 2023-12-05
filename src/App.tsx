@@ -33,7 +33,7 @@ function App() {
     return () => {
       socket.off("addSocketId");
     };
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     if (message.text && message.status) {

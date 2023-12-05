@@ -18,8 +18,13 @@ interface authStateType {
   };
 }
 
+interface homeStateType {
+  tab: "My group" | "All group";
+}
+
 interface AppState {
   authReducer: authStateType;
+  homeReducer: homeStateType;
 }
 
 interface ActionType {
