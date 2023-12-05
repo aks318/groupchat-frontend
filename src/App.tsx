@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import MainRoutes from "routes/mainRoutes";
 import { SET_MESSAGE } from "store/authReducer/authConstants";
+import { socket } from "socket";
 
 function App() {
   const windowSize = useWindowSize();
@@ -56,9 +57,23 @@ function App() {
       </Box>
     );
   }
+
+  const fallback = (
+    <Box
+      sx={{
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Typography sx={{ fontWeight: 600 }}>Loading...</Typography>
+    </Box>
+  );
+
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={fallback}>
         <MainRoutes />
         {location.pathname !== "/" && location.pathname !== "/auth" ? (
           <Footer />
