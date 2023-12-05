@@ -18,8 +18,16 @@ interface authStateType {
   };
 }
 
+interface groupDetailType {
+  entityId: string;
+  groupName: string;
+  ownerId: string;
+  people: string[];
+}
+
 interface homeStateType {
   tab: "My group" | "All group";
+  myAllGroup: groupDetailType[];
 }
 
 interface AppState {

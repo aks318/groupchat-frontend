@@ -1,1 +1,2 @@
 export const HOME_SET_TAB = "HOME_SET_TAB";
+export const HOME_SET_MY_ALL_GROUP = "HOME_SET_MY_ALL_GROUP";

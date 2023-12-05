@@ -1,19 +1,19 @@
 import { CustomButton } from "Layout/Button/Button.styles";
 import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { createGroup } from "../utils";
 
 interface Props {
+  entityId: string;
   handleDialogClose: () => void;
 }
 
-const NewGroup = ({ handleDialogClose }: Props) => {
-  const { userDetails } = useSelector((state: AppState) => state.authReducer);
+const NewGroup = ({ entityId, handleDialogClose }: Props) => {
   const [groupName, setGroupName] = useState("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createGroup(groupName, userDetails.entityId);
+    await createGroup(groupName, entityId);
     handleDialogClose();
   };
   return (

@@ -1,11 +1,20 @@
-import { Box } from "@mui/material";
-import { CustomButton } from "Layout/Button/Button.styles";
+import React, { useEffect, useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import DialogBox from "Layout/DialogBox/DialogBox";
-import React, { useState } from "react";
 import NewGroup from "./NewGroup";
+import { theme } from "Utils/theme";
+import { getAllmygroup } from "../utils";
+import { useSelector } from "react-redux";
 
 const MyGroup = () => {
+  const { userDetails } = useSelector((state: AppState) => state.authReducer);
+  const { myAllGroup } = useSelector((state: AppState) => state.homeReducer);
   const [dialogOpen, setDialogOpen] = useState(false);
+
+  useEffect(() => {
+    if (!myAllGroup.length) getAllmygroup(userDetails.entityId);
+  }, []);
   const handleDialogClose = () => {
     setDialogOpen(false);
   };
@@ -13,14 +22,27 @@ const MyGroup = () => {
     setDialogOpen(true);
   };
   return (
-    <Box>
-      <CustomButton onClick={handleDialogOpen}>Add New</CustomButton>
+    <Box sx={{ flex: 1, position: "relative" }}>
+      <IconButton
+        onClick={handleDialogOpen}
+        sx={{
+          backgroundColor: `${theme.bg.blue.tertiary} !important`,
+          position: "absolute",
+          bottom: "24px",
+          right: "16px",
+        }}
+      >
+        <AddIcon sx={{ color: theme.color.white.primary }} />
+      </IconButton>
       <DialogBox
         header="New Group"
         handleDialogClose={handleDialogClose}
         isDialogOpen={dialogOpen}
       >
-        <NewGroup handleDialogClose={handleDialogClose} />
+        <NewGroup
+          entityId={userDetails.entityId}
+          handleDialogClose={handleDialogClose}
+        />
       </DialogBox>
     </Box>
   );
