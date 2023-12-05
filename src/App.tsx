@@ -9,10 +9,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MainRoutes from "routes/mainRoutes";
 import { SET_MESSAGE } from "store/authReducer/authConstants";
 import { socket } from "socket";
+import { updateSocket } from "Utils/updateSocketId";
 
 function App() {
   const windowSize = useWindowSize();
-  const { isLoggedIn, message } = useSelector(
+  const { isLoggedIn, userDetails, message } = useSelector(
     (state: AppState) => state.authReducer
   );
   const navigate = useNavigate();
@@ -23,6 +24,15 @@ function App() {
     if (isLoggedIn) {
       navigate("/home");
     } else navigate("/");
+  }, []);
+
+  useEffect(() => {
+    socket.on("addSocketId", () => {
+      if (isLoggedIn) updateSocket(socket.id, userDetails.entityId);
+    });
+    return () => {
+      socket.off("addSocketId");
+    };
   }, []);
 
   useEffect(() => {

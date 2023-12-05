@@ -1,4 +1,5 @@
 interface userDetailsType {
+  entityId: string;
   name: string;
   avatarId: number;
   username: string;
