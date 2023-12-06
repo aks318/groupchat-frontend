@@ -21,6 +21,7 @@ const Landing = () => {
         gap: "16px",
         "& img": {
           width: "70%",
+          maxWidth: 350,
           objectFit: "contain",
         },
       }}

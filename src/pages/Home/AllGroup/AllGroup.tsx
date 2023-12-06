@@ -46,6 +46,11 @@ const AllGroup = ({ searchValue }: Props) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            "& img": {
+              width: "80%",
+              maxWidth: 350,
+              objectFit: "contain",
+            },
           }}
         >
           <img src={Home2} alt="hero" />
