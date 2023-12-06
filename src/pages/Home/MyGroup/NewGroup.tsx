@@ -14,7 +14,7 @@ const NewGroup = ({ entityId, handleDialogClose }: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await createGroup(groupName, entityId);
-    // handleDialogClose();
+    handleDialogClose();
   };
   return (
     <form
