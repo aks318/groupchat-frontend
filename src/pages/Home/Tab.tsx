@@ -1,19 +1,14 @@
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { theme } from "Utils/theme";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HOME_SET_TAB } from "store/homeReducer/homeConstants";
+import { useSelector } from "react-redux";
 
-const Tab = () => {
+interface Props {
+  handleSwitch: (newtab: "My group" | "All group") => void;
+}
+const Tab = ({ handleSwitch }: Props) => {
   const { tab } = useSelector((state: AppState) => state.homeReducer);
-  const dispatch = useDispatch();
 
-  const handleSwitch = (tab: "My group" | "All group") => {
-    dispatch({
-      type: HOME_SET_TAB,
-      payload: tab,
-    });
-  };
   return (
     <Box>
       <List
