@@ -1,15 +1,40 @@
+import React, { Fragment } from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import { theme } from "Utils/theme";
 import moment from "moment";
-import React, { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { HOME_SET_GROUP_DETAIL } from "store/homeReducer/homeConstants";
 
 interface Props {
   grp: groupDetailType;
 }
 const GroupBox = ({ grp }: Props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleGrpClick = (grpDetail: groupDetailType) => {
+    dispatch({
+      type: HOME_SET_GROUP_DETAIL,
+      payload: grpDetail,
+    });
+    navigate("/chat");
+  };
+
   return (
     <Fragment>
-      <Box sx={{ px: 2, py: 1.5 }}>
+      <Box
+        sx={{
+          px: 2,
+          py: 1.5,
+          "&:active": {
+            scale: "0.9",
+            opacity: 0.9,
+          },
+          transition: "all 0.3s ease-in",
+        }}
+        onClick={() => handleGrpClick(grp)}
+      >
         <Typography
           sx={{
             color: theme.color.white.primary,

@@ -30,6 +30,7 @@ interface homeStateType {
   tab: "My group" | "All group";
   myAllGroup: groupDetailType[];
   allGroup: groupDetailType[];
+  groupDetail: groupDetailType;
 }
 
 interface AppState {
