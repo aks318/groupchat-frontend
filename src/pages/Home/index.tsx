@@ -8,7 +8,14 @@ import AllGroup from "./AllGroup/AllGroup";
 const Home = () => {
   const { tab } = useSelector((state: AppState) => state.homeReducer);
   return (
-    <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "auto",
+      }}
+    >
       <Tab />
       {tab === "My group" ? <MyGroup /> : <AllGroup />}
     </Box>

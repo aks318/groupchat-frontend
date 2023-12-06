@@ -23,6 +23,7 @@ interface groupDetailType {
   groupName: string;
   ownerId: string;
   people: string[];
+  createdDate: string;
 }
 
 interface homeStateType {
