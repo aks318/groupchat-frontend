@@ -36,7 +36,11 @@ const Home = () => {
         value={searchValue}
         handleChange={handleChange}
       />
-      {tab === "My group" ? <MyGroup /> : <AllGroup />}
+      {tab === "My group" ? (
+        <MyGroup searchValue={searchValue} />
+      ) : (
+        <AllGroup searchValue={searchValue} />
+      )}
     </Box>
   );
 };

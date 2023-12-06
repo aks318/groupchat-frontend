@@ -11,14 +11,31 @@ import { getAllmygroup } from "../utils";
 import NewGroup from "./NewGroup";
 import moment from "moment";
 
-const MyGroup = () => {
+interface Props {
+  searchValue: string;
+}
+const MyGroup = ({ searchValue }: Props) => {
   const { userDetails } = useSelector((state: AppState) => state.authReducer);
   const { myAllGroup } = useSelector((state: AppState) => state.homeReducer);
+  const [groupList, setGroupList] = useState<groupDetailType[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!myAllGroup.length) getAllmygroup(userDetails.entityId);
   }, []);
+
+  useEffect(() => {
+    const time = setTimeout(() => {
+      if (searchValue) {
+        const filterList = myAllGroup.filter((data) =>
+          data.groupName.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setGroupList(filterList);
+      } else setGroupList(myAllGroup);
+    }, 300);
+    return () => clearTimeout(time);
+  }, [searchValue, myAllGroup]);
+
   const handleDialogClose = () => {
     setDialogOpen(false);
   };
@@ -27,9 +44,9 @@ const MyGroup = () => {
   };
   return (
     <Box sx={{ flex: 1, position: "relative", overflow: "auto" }}>
-      {myAllGroup.length ? (
+      {groupList.length ? (
         <>
-          {myAllGroup.map((grp) => (
+          {groupList.map((grp) => (
             <Fragment key={grp.entityId}>
               <Box sx={{ px: 2, py: 1.5 }}>
                 <Typography
