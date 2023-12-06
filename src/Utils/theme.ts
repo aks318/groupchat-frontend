@@ -3,7 +3,7 @@ export const theme = {
     blue: {
       primary: "#012a4a",
       secondary: "#013a63",
-      tertiary: "#00b4d8",
+      tertiary: "#2c7da0",
     },
     white: {
       primary: "#fff",
@@ -20,7 +20,7 @@ export const theme = {
     blue: {
       primary: "#012a4a",
       secondary: "#013a63",
-      tertiary: "#00b4d8",
+      tertiary: "#014f86",
     },
   },
   border: {
