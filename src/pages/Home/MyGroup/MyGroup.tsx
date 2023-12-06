@@ -59,7 +59,7 @@ const MyGroup = () => {
                   >
                     {grp.people.length === 1
                       ? "Add people"
-                      : `You, ${grp.people.length - 1} people`}
+                      : `You, ${grp.people.length - 1} more people`}
                   </Typography>
                   <Typography
                     sx={{

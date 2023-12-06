@@ -1,6 +1,9 @@
 import API from "Utils/intercepter";
 import { SET_MESSAGE } from "store/authReducer/authConstants";
-import { HOME_SET_MY_ALL_GROUP } from "store/homeReducer/homeConstants";
+import {
+  HOME_SET_ALL_GROUP,
+  HOME_SET_MY_ALL_GROUP,
+} from "store/homeReducer/homeConstants";
 import { store } from "store/store";
 
 export const createGroup = async (groupName: string, entityId: string) => {
@@ -36,7 +39,16 @@ export const getAllmygroup = async (entityId: string) => {
     console.log(error);
   }
 };
-export const getGroups = (entityId: string) => {
+export const getGroups = async (entityId: string) => {
+  const res = await API.get("group/getGroups", {
+    params: {
+      entityId,
+    },
+  });
+  store.dispatch({
+    type: HOME_SET_ALL_GROUP,
+    payload: res.data.data.groupList,
+  });
   try {
   } catch (error) {
     console.log(error);
