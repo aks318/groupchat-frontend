@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { CustomButton } from "Layout/Button/Button.styles";
 import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
+import { updateUser } from "./utils";
 
 interface Props {
   userDetails: userDetailsType;
+  handleDialogClose: () => void;
 }
-const Details = ({ userDetails }: Props) => {
+const Details = ({ userDetails, handleDialogClose }: Props) => {
   const [name, setName] = useState(userDetails.name);
   const [username, setUsername] = useState(userDetails.username);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await updateUser(name, username, userDetails.entityId);
+    handleDialogClose();
   };
 
   return (

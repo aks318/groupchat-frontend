@@ -114,7 +114,10 @@ const Profile = () => {
         isDialogOpen={detailDialogOpen}
         handleDialogClose={handleDetailDialog}
       >
-        <Details userDetails={userDetails} />
+        <Details
+          userDetails={userDetails}
+          handleDialogClose={handleDetailDialog}
+        />
       </DialogBox>
       <DialogBox
         header="Change Avatar"
