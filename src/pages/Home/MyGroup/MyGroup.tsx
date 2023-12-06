@@ -28,7 +28,7 @@ const MyGroup = () => {
   return (
     <Box sx={{ flex: 1, position: "relative", overflow: "auto" }}>
       {myAllGroup.length ? (
-        <Box>
+        <>
           {myAllGroup.map((grp) => (
             <Fragment key={grp.entityId}>
               <Box sx={{ px: 2, py: 1.5 }}>
@@ -81,7 +81,7 @@ const MyGroup = () => {
               />
             </Fragment>
           ))}
-        </Box>
+        </>
       ) : (
         <Box
           sx={{
