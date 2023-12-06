@@ -24,3 +24,22 @@ export const updateUser = async (
     console.log(error);
   }
 };
+
+export const changeAvatar = async (avatarId: number, entityId: string) => {
+  try {
+    const res = await API.post("user/changeAvatar", { avatarId, entityId });
+    store.dispatch({
+      type: SET_MESSAGE,
+      payload: {
+        text: "Avatar Changed.",
+        status: "success",
+      },
+    });
+    store.dispatch({
+      type: SET_USER_DETAILS,
+      payload: res.data.data.userDetails,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

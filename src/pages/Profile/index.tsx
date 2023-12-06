@@ -124,7 +124,10 @@ const Profile = () => {
         isDialogOpen={avatarDialogOpen}
         handleDialogClose={handleAvatarDialog}
       >
-        <Avatars />
+        <Avatars
+          userDetails={userDetails}
+          handleDialogClose={handleAvatarDialog}
+        />
       </DialogBox>
     </Box>
   );
