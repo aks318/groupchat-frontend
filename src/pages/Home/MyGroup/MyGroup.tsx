@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 
 import DialogBox from "Layout/DialogBox/DialogBox";
 import Home1 from "Images/home1.svg";
@@ -9,7 +9,7 @@ import Home1 from "Images/home1.svg";
 import { theme } from "Utils/theme";
 import { getAllmygroup } from "../utils";
 import NewGroup from "./NewGroup";
-import moment from "moment";
+import GroupBox from "../GroupBox";
 
 interface Props {
   searchValue: string;
@@ -47,56 +47,7 @@ const MyGroup = ({ searchValue }: Props) => {
       {groupList.length ? (
         <>
           {groupList.map((grp) => (
-            <Fragment key={grp.entityId}>
-              <Box sx={{ px: 2, py: 1.5 }}>
-                <Typography
-                  sx={{
-                    color: theme.color.white.primary,
-                    fontWeight: 600,
-                    opacity: 0.9,
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {grp.groupName}
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    px: 0.5,
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: theme.color.white.primary,
-                      fontSize: 11,
-                      opacity: 0.7,
-                    }}
-                  >
-                    {grp.people.length === 1
-                      ? "Add people"
-                      : `You, ${grp.people.length - 1} more people`}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: theme.color.white.primary,
-                      fontSize: 11,
-                      opacity: 0.6,
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    Created At: {moment(grp.createdDate).format("DD-MM-YYYY")}
-                  </Typography>
-                </Box>
-              </Box>
-              <Divider
-                sx={{
-                  borderColor: theme.color.white.primary,
-                  opacity: 0.2,
-                }}
-              />
-            </Fragment>
+            <GroupBox key={grp.entityId} grp={grp} />
           ))}
         </>
       ) : (
