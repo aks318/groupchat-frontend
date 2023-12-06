@@ -15,7 +15,9 @@ const Header = () => {
         justifyContent: "space-between",
       }}
     >
-      <Typography>{groupDetail.groupName}</Typography>
+      <Typography sx={{ color: theme.color.white.primary, fontWeight: 600 }}>
+        {groupDetail.groupName}
+      </Typography>
       <IconButton>
         <MoreVertIcon sx={{ color: "#fff" }} />
       </IconButton>
