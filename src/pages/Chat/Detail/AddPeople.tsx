@@ -6,8 +6,9 @@ import { theme } from "Utils/theme";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { CustomButton } from "Layout/Button/Button.styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPeople } from "../utils";
+import { CHAT_ADD_PEOPLE_PROFILES } from "store/chatReducer/chatConstants";
 
 interface Props {
   groupDetail: groupDetailType;
@@ -18,6 +19,7 @@ const AddPeople = ({ groupDetail }: Props) => {
   const [searchText, setSearchText] = useState("");
   const [userList, setUserList] = useState<userDetailsType[]>([]);
   const [addedList, setAddedList] = useState<userDetailsType[]>([]);
+  const dispatch: AppDispatch = useDispatch();
 
   const handleChange = (value: string) => {
     setSearchText(value);
@@ -51,8 +53,16 @@ const AddPeople = ({ groupDetail }: Props) => {
   };
 
   const handleAddPeople = async () => {
-    const entityIdList = addedList.map((data) => data.entityId);
-    await addPeople(groupDetail.entityId, entityIdList);
+    try {
+      const entityIdList = addedList.map((data) => data.entityId);
+      await addPeople(groupDetail.entityId, entityIdList);
+      dispatch({
+        type: CHAT_ADD_PEOPLE_PROFILES,
+        payload: addedList,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Box
@@ -83,6 +93,7 @@ const AddPeople = ({ groupDetail }: Props) => {
             backgroundColor: theme.bg.blue.primary,
             px: 1.5,
             py: 1,
+            overflow: "auto",
           }}
         >
           {userList.map((data) => (

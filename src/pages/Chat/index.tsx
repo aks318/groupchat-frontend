@@ -4,12 +4,18 @@ import InputBox from "./InputBox";
 import { useSelector } from "react-redux";
 import Chat1 from "Images/chat1.svg";
 import { theme } from "Utils/theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Detail from "./Detail/Detail";
+import { getPeopleProfile } from "./utils";
 
 const Chat = () => {
   const { groupDetail } = useSelector((state: AppState) => state.homeReducer);
   const [detailActive, setDetailActive] = useState(false);
+  useEffect(() => {
+    if (JSON.stringify(groupDetail) !== "{}") {
+      getPeopleProfile(groupDetail.people);
+    }
+  }, []);
   if (JSON.stringify(groupDetail) === "{}") {
     return (
       <Box
@@ -45,7 +51,14 @@ const Chat = () => {
     setDetailActive((prev) => !prev);
   };
   return (
-    <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "auto",
+      }}
+    >
       <Header
         detailActive={detailActive}
         handleDetailActive={handleDetailActive}

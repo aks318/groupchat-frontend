@@ -34,7 +34,7 @@ interface homeStateType {
 }
 
 interface chatStateType {
-  activeScreen: "Chat" | "Details";
+  peopleProfile: userDetailsType[];
 }
 
 interface AppState {

@@ -1,5 +1,6 @@
 import API from "Utils/intercepter";
 import { SET_MESSAGE } from "store/authReducer/authConstants";
+import { CHAT_SET_PEOPLE_PROFILES } from "store/chatReducer/chatConstants";
 import {
   HOME_UPDATE_GROUP_DETAIL,
   HOME_UPDATE_MY_ALL_GROUP,
@@ -31,7 +32,19 @@ export const addPeople = async (
         status: "success",
       },
     });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getPeopleProfile = async (entityIdList: string[]) => {
+  try {
+    const res = await API.post("group/getPeopleProfile", { entityIdList });
+    store.dispatch({
+      type: CHAT_SET_PEOPLE_PROFILES,
+      payload: res.data.data.profileList,
+    });
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };
