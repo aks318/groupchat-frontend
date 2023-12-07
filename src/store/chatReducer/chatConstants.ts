@@ -1,1 +1,1 @@
-export const SET_CHAT_SCREEN = "SET_CHAT_SCREEN";
+export const CLEAR_CHAT_STATE = "CLEAR_CHAT_STATE";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Box, Divider, IconButton, Typography } from "@mui/material";
 import Searchbar from "Component/Searchbar";
 import API from "Utils/intercepter";
@@ -86,9 +86,8 @@ const AddPeople = ({ groupDetail }: Props) => {
           }}
         >
           {userList.map((data) => (
-            <>
+            <Fragment key={data.entityId}>
               <Box
-                key={data.entityId}
                 sx={{
                   py: 1,
                   display:
@@ -155,7 +154,7 @@ const AddPeople = ({ groupDetail }: Props) => {
                   opacity: 0.2,
                 }}
               />
-            </>
+            </Fragment>
           ))}
         </Box>
       </Box>
@@ -173,6 +172,7 @@ const AddPeople = ({ groupDetail }: Props) => {
       >
         {addedList.map((data) => (
           <Box
+            key={data.entityId}
             sx={{
               flexShrink: 0,
               py: 0.5,

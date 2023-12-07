@@ -46,6 +46,7 @@ interface AppState {
 interface ActionType {
   type: string;
   payload: any;
+  entityId?: string;
 }
 
 type AppDispatch = ThunkDispatch<AppState, any, AnyAction>;

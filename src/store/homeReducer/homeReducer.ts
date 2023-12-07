@@ -1,8 +1,11 @@
 import {
+  CLEAR_HOME_STATE,
   HOME_SET_ALL_GROUP,
   HOME_SET_GROUP_DETAIL,
   HOME_SET_MY_ALL_GROUP,
   HOME_SET_TAB,
+  HOME_UPDATE_GROUP_DETAIL,
+  HOME_UPDATE_MY_ALL_GROUP,
 } from "./homeConstants";
 
 const initialState: homeStateType = {
@@ -29,6 +32,18 @@ const homeReducer = (
     case HOME_SET_GROUP_DETAIL: {
       return { ...state, groupDetail: action.payload };
     }
+    case HOME_UPDATE_GROUP_DETAIL: {
+      return { ...state, groupDetail: action.payload };
+    }
+    case HOME_UPDATE_MY_ALL_GROUP: {
+      const updatedData = state.myAllGroup.map((data) => {
+        if (data.entityId === action.entityId) return action.payload;
+        else return data;
+      });
+      return { ...state, myAllGroup: updatedData };
+    }
+    case CLEAR_HOME_STATE:
+      return initialState;
     default:
       return state;
   }

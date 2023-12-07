@@ -1,3 +1,5 @@
+import { CLEAR_CHAT_STATE } from "./chatConstants";
+
 const initialState: chatStateType = {
   activeScreen: "Chat",
 };
@@ -7,6 +9,8 @@ const chatReducer = (
   action: ActionType
 ): chatStateType => {
   switch (action.type) {
+    case CLEAR_CHAT_STATE:
+      return initialState;
     default:
       return state;
   }
