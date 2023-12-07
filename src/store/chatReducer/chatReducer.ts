@@ -1,5 +1,3 @@
-import { SET_CHAT_SCREEN } from "./chatConstants";
-
 const initialState: chatStateType = {
   activeScreen: "Chat",
 };
