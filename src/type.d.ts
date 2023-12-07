@@ -33,9 +33,14 @@ interface homeStateType {
   groupDetail: groupDetailType;
 }
 
+interface chatStateType {
+  activeScreen: "Chat" | "Details";
+}
+
 interface AppState {
   authReducer: authStateType;
   homeReducer: homeStateType;
+  chatReducer: chatStateType;
 }
 
 interface ActionType {

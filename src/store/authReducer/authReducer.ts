@@ -17,7 +17,10 @@ const initialState: authStateType = {
   },
 };
 
-const authReduce = (state = initialState, action: ActionType) => {
+const authReduce = (
+  state = initialState,
+  action: ActionType
+): authStateType => {
   switch (action.type) {
     case SET_AUTH_TOKEN: {
       return { ...state, token: action.payload };

@@ -12,7 +12,10 @@ const initialState: homeStateType = {
   groupDetail: {} as groupDetailType,
 };
 
-const homeReducer = (state = initialState, action: ActionType) => {
+const homeReducer = (
+  state = initialState,
+  action: ActionType
+): homeStateType => {
   switch (action.type) {
     case HOME_SET_TAB: {
       return { ...state, tab: action.payload };

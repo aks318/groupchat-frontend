@@ -11,6 +11,7 @@ import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/lib/persistReducer";
 import homeReducer from "./homeReducer/homeReducer";
+import chatReducer from "./chatReducer/chatReducer";
 
 declare global {
   interface Window {
@@ -30,6 +31,7 @@ const rootReducer = combineReducers<AppState>({
     authReducer
   ) as typeof authReducer,
   homeReducer: homeReducer,
+  chatReducer: chatReducer,
 });
 
 export const store: Store<AppState, AnyAction> & {
