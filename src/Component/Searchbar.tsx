@@ -1,13 +1,14 @@
 import React from "react";
 import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
-import { InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 import { theme } from "Utils/theme";
 
 interface Props {
   placeholder: string;
   value: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (value: string) => void;
 }
 const Searchbar = ({ placeholder, value, handleChange }: Props) => {
   return (
@@ -15,9 +16,9 @@ const Searchbar = ({ placeholder, value, handleChange }: Props) => {
       name="search"
       value={value}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={(e) => handleChange(e.target.value)}
       sx={{
-        m: 1,
+        width: "100%",
         "& .MuiOutlinedInput-root": {
           borderRadius: "30px",
           height: 32,
@@ -27,7 +28,13 @@ const Searchbar = ({ placeholder, value, handleChange }: Props) => {
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <SearchIcon sx={{ color: theme.color.white.primary }} />
+            {value ? (
+              <IconButton sx={{ p: 0 }} onClick={() => handleChange("")}>
+                <CloseIcon sx={{ color: theme.color.white.primary }} />
+              </IconButton>
+            ) : (
+              <SearchIcon sx={{ color: theme.color.white.primary }} />
+            )}
           </InputAdornment>
         ),
       }}

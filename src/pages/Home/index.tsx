@@ -11,8 +11,8 @@ const Home = () => {
   const { tab } = useSelector((state: AppState) => state.homeReducer);
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+  const handleChange = (value: string) => {
+    setSearchValue(value);
   };
   const handleSwitch = (newtab: "My group" | "All group") => {
     dispatch({
@@ -31,11 +31,13 @@ const Home = () => {
       }}
     >
       <Tab handleSwitch={handleSwitch} />
-      <Searchbar
-        placeholder="Search Group"
-        value={searchValue}
-        handleChange={handleChange}
-      />
+      <Box sx={{ m: 1 }}>
+        <Searchbar
+          placeholder="Search Group"
+          value={searchValue}
+          handleChange={handleChange}
+        />
+      </Box>
       {tab === "My group" ? (
         <MyGroup searchValue={searchValue} />
       ) : (
