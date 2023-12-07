@@ -2,6 +2,7 @@ import { CustomButton } from "Layout/Button/Button.styles";
 import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
 import React, { useState } from "react";
 import { createGroup } from "../utils";
+import { nameLength } from "Utils/CharLength";
 
 interface Props {
   entityId: string;
@@ -32,8 +33,8 @@ const NewGroup = ({ entityId, handleDialogClose }: Props) => {
         placeholder="Group Name"
         sx={{ width: "100%" }}
         inputProps={{
-          minLength: 5,
-          maxLength: 20,
+          minLength: nameLength.min,
+          maxLength: nameLength.max,
         }}
         required
         onChange={(e) => setGroupName(e.target.value)}

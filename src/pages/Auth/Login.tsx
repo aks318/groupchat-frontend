@@ -12,6 +12,7 @@ import {
   SET_USER_DETAILS,
 } from "store/authReducer/authConstants";
 import { useNavigate } from "react-router-dom";
+import { passwordLength, usernameLength } from "Utils/CharLength";
 
 interface Props {
   handleSwitch: () => void;
@@ -66,8 +67,8 @@ const Login = ({ handleSwitch }: Props) => {
           placeholder="Username"
           sx={{ width: "100%" }}
           inputProps={{
-            minLength: 5,
-            maxLength: 10,
+            minLength: usernameLength.min,
+            maxLength: usernameLength.max,
           }}
           required
           onChange={(e) => handleChange("username", e.target.value)}
@@ -79,8 +80,8 @@ const Login = ({ handleSwitch }: Props) => {
           type="password"
           sx={{ width: "100%" }}
           inputProps={{
-            minLength: 5,
-            maxLength: 10,
+            minLength: passwordLength.min,
+            maxLength: passwordLength.max,
           }}
           required
           onChange={(e) => handleChange("password", e.target.value)}

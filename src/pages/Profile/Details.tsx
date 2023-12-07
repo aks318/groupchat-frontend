@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CustomButton } from "Layout/Button/Button.styles";
 import { CustomTextInput } from "Layout/TextInput/TextInput.styles";
 import { updateUser } from "./utils";
+import { nameLength, usernameLength } from "Utils/CharLength";
 
 interface Props {
   userDetails: userDetailsType;
@@ -33,8 +34,8 @@ const Details = ({ userDetails, handleDialogClose }: Props) => {
         value={name}
         sx={{ width: "100%" }}
         inputProps={{
-          minLength: 5,
-          maxLength: 15,
+          minLength: nameLength.min,
+          maxLength: nameLength.max,
         }}
         required
         onChange={(e) => setName(e.target.value)}
@@ -46,8 +47,8 @@ const Details = ({ userDetails, handleDialogClose }: Props) => {
         value={username}
         sx={{ width: "100%" }}
         inputProps={{
-          minLength: 5,
-          maxLength: 10,
+          minLength: usernameLength.min,
+          maxLength: usernameLength.max,
         }}
         required
         onChange={(e) => setUsername(e.target.value)}

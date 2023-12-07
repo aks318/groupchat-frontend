@@ -12,6 +12,7 @@ import {
 } from "store/authReducer/authConstants";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { nameLength, passwordLength, usernameLength } from "Utils/CharLength";
 
 interface Props {
   handleSwitch: () => void;
@@ -74,8 +75,8 @@ const Register = ({ handleSwitch }: Props) => {
           placeholder="Name"
           sx={{ width: "100%" }}
           inputProps={{
-            minLength: 5,
-            maxLength: 15,
+            minLength: nameLength.min,
+            maxLength: nameLength.max,
           }}
           required
           onChange={(e) => handleChange("name", e.target.value)}
@@ -86,8 +87,8 @@ const Register = ({ handleSwitch }: Props) => {
           placeholder="Username"
           sx={{ width: "100%" }}
           inputProps={{
-            minLength: 5,
-            maxLength: 10,
+            minLength: usernameLength.min,
+            maxLength: usernameLength.max,
           }}
           required
           onChange={(e) => handleChange("username", e.target.value)}
@@ -99,8 +100,8 @@ const Register = ({ handleSwitch }: Props) => {
           type="password"
           sx={{ width: "100%" }}
           inputProps={{
-            minLength: 5,
-            maxLength: 15,
+            minLength: passwordLength.min,
+            maxLength: passwordLength.max,
           }}
           required
           onChange={(e) => handleChange("password", e.target.value)}
@@ -112,8 +113,8 @@ const Register = ({ handleSwitch }: Props) => {
           type="password"
           sx={{ width: "100%" }}
           inputProps={{
-            minLength: 5,
-            maxLength: 15,
+            minLength: passwordLength.min,
+            maxLength: passwordLength.max,
           }}
           required
           onChange={(e) => handleChange("confirmPassword", e.target.value)}
