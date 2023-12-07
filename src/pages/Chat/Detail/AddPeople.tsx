@@ -4,13 +4,17 @@ import Searchbar from "Component/Searchbar";
 import API from "Utils/intercepter";
 import { theme } from "Utils/theme";
 import CloseIcon from "@mui/icons-material/Close";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { CustomButton } from "Layout/Button/Button.styles";
+import { useSelector } from "react-redux";
+import { addPeople } from "../utils";
 
 interface Props {
-  grpEntityId: string;
+  groupDetail: groupDetailType;
   handleDialogClose: () => void;
 }
-const AddPeople = ({ grpEntityId }: Props) => {
+const AddPeople = ({ groupDetail }: Props) => {
+  const { userDetails } = useSelector((state: AppState) => state.authReducer);
   const [searchText, setSearchText] = useState("");
   const [userList, setUserList] = useState<userDetailsType[]>([]);
   const [addedList, setAddedList] = useState<userDetailsType[]>([]);
@@ -29,14 +33,27 @@ const AddPeople = ({ grpEntityId }: Props) => {
     return () => clearTimeout(timer);
   }, [searchText]);
 
+  const checkAdded = (entityId: string) => {
+    const check =
+      addedList.find((data) => data.entityId === entityId) ||
+      groupDetail.people.includes(entityId);
+    if (check) {
+      return true;
+    } else return false;
+  };
   const handleAdd = (data: userDetailsType) => {
-    setAddedList((prev) => [data, ...prev]);
+    if (!checkAdded(data.entityId)) {
+      setAddedList((prev) => [data, ...prev]);
+    }
   };
   const handleRemove = (entityId: string) => {
     setAddedList((prev) => prev.filter((data) => data.entityId !== entityId));
   };
 
-  const handleAddPeople = () => {};
+  const handleAddPeople = async () => {
+    const entityIdList = addedList.map((data) => data.entityId);
+    await addPeople(groupDetail.entityId, entityIdList);
+  };
   return (
     <Box
       sx={{
@@ -74,7 +91,8 @@ const AddPeople = ({ grpEntityId }: Props) => {
                 key={data.entityId}
                 sx={{
                   py: 1,
-                  display: "flex",
+                  display:
+                    userDetails.entityId === data.entityId ? "none" : "flex",
                   alignItems: "center",
                   gap: "8px",
                 }}
@@ -123,9 +141,16 @@ const AddPeople = ({ grpEntityId }: Props) => {
                     {data.username}
                   </Typography>
                 </Box>
+                {checkAdded(data.entityId) ? (
+                  <CheckCircleOutlineIcon
+                    sx={{ color: theme.color.white.secondary, ml: "auto" }}
+                  />
+                ) : undefined}
               </Box>
               <Divider
                 sx={{
+                  display:
+                    userDetails.entityId === data.entityId ? "none" : "flex",
                   borderColor: theme.color.white.primary,
                   opacity: 0.2,
                 }}
@@ -185,6 +210,7 @@ const AddPeople = ({ grpEntityId }: Props) => {
         variant="contained"
         onClick={handleAddPeople}
         sx={{ mt: "auto" }}
+        disabled={!addedList.length}
       >
         Add
       </CustomButton>

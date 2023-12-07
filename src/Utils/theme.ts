@@ -7,6 +7,7 @@ export const theme = {
     },
     white: {
       primary: "#fff",
+      secondary: "#f5f5f5",
     },
     grey: {
       primary: "#7f7f7f",

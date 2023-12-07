@@ -30,10 +30,7 @@ const Detail = () => {
         handleDialogClose={handleDialog}
         isDialogOpen={dialogOpen}
       >
-        <AddPeople
-          grpEntityId={groupDetail.entityId}
-          handleDialogClose={handleDialog}
-        />
+        <AddPeople groupDetail={groupDetail} handleDialogClose={handleDialog} />
       </DialogBox>
     </Box>
   );
