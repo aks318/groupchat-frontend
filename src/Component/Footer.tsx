@@ -28,14 +28,14 @@ const Footer = () => {
           key={data.id}
           sx={{
             flex: 1,
-            py: 0.5,
+            py: 1,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             backgroundColor:
               pathname === data.route ? theme.bg.blue.tertiary : "",
             "& svg": {
-              fontSize: pathname === data.route ? "28px" : "24px",
+              fontSize: pathname === data.route ? "32px" : "28px",
             },
             transition: "all 0.2s ease-in",
           }}

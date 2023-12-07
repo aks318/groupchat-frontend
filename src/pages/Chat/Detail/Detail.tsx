@@ -118,11 +118,11 @@ const Detail = () => {
           sx={{
             backgroundColor: `${theme.bg.blue.tertiary} !important`,
             position: "fixed",
-            bottom: "54px",
-            right: "16px",
+            bottom: "72px",
+            right: "28px",
           }}
         >
-          <AddIcon sx={{ color: theme.color.white.primary }} />
+          <AddIcon fontSize="large" sx={{ color: theme.color.white.primary }} />
         </IconButton>
       ) : undefined}
       <DialogBox

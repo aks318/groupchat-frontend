@@ -19,15 +19,12 @@ const AllGroup = ({ searchValue }: Props) => {
   }, []);
 
   useEffect(() => {
-    const time = setTimeout(() => {
-      if (searchValue) {
-        const filterList = allGroup.filter((data) =>
-          data.groupName.toLowerCase().includes(searchValue.toLowerCase())
-        );
-        setGroupList(filterList);
-      } else setGroupList(allGroup);
-    }, 300);
-    return () => clearTimeout(time);
+    if (searchValue) {
+      const filterList = allGroup.filter((data) =>
+        data.groupName.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setGroupList(filterList);
+    } else setGroupList(allGroup);
   }, [searchValue, allGroup]);
 
   return (

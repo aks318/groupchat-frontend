@@ -25,15 +25,12 @@ const MyGroup = ({ searchValue }: Props) => {
   }, []);
 
   useEffect(() => {
-    const time = setTimeout(() => {
-      if (searchValue) {
-        const filterList = myAllGroup.filter((data) =>
-          data.groupName.toLowerCase().includes(searchValue.toLowerCase())
-        );
-        setGroupList(filterList);
-      } else setGroupList(myAllGroup);
-    }, 300);
-    return () => clearTimeout(time);
+    if (searchValue) {
+      const filterList = myAllGroup.filter((data) =>
+        data.groupName.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setGroupList(filterList);
+    } else setGroupList(myAllGroup);
   }, [searchValue, myAllGroup]);
 
   const handleDialogClose = () => {
@@ -83,11 +80,11 @@ const MyGroup = ({ searchValue }: Props) => {
         sx={{
           backgroundColor: `${theme.bg.blue.tertiary} !important`,
           position: "fixed",
-          bottom: "54px",
-          right: "16px",
+          bottom: "72px",
+          right: "28px",
         }}
       >
-        <AddIcon sx={{ color: theme.color.white.primary }} />
+        <AddIcon fontSize="large" sx={{ color: theme.color.white.primary }} />
       </IconButton>
       <DialogBox
         header="New Group"
