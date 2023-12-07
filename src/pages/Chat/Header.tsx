@@ -40,9 +40,23 @@ const Header = ({ detailActive, handleDetailActive }: Props) => {
         >
           <ArrowBackIcon sx={{ color: "#fff" }} />
         </IconButton>
-        <Typography sx={{ color: theme.color.white.primary, fontWeight: 600 }}>
-          {groupDetail.groupName}
-        </Typography>
+        <Box>
+          <Typography
+            sx={{ color: theme.color.white.primary, fontWeight: 600 }}
+          >
+            {groupDetail.groupName}
+          </Typography>
+          <Typography
+            sx={{
+              color: theme.color.white.secondary,
+              fontSize: 11,
+            }}
+          >
+            {groupDetail.people.length === 1
+              ? "Add people"
+              : `You, ${groupDetail.people.length - 1} more people`}
+          </Typography>
+        </Box>
       </Box>
       {/* <IconButton>
         <MoreVertIcon sx={{ color: "#fff" }} />
