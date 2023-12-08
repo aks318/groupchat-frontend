@@ -35,6 +35,9 @@ const Footer = () => {
         payload: [groupData],
       });
     });
+    return () => {
+      socket.off("newGroup");
+    };
   }, []);
 
   return (
