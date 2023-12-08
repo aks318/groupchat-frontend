@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Home2 from "Images/home2.svg";
 import { theme } from "Utils/theme";
-import { getGroups } from "../utils";
 import { useSelector } from "react-redux";
 import GroupBox from "../GroupBox";
 
@@ -10,13 +9,8 @@ interface Props {
   searchValue: string;
 }
 const AllGroup = ({ searchValue }: Props) => {
-  const { userDetails } = useSelector((state: AppState) => state.authReducer);
   const { allGroup } = useSelector((state: AppState) => state.homeReducer);
   const [groupList, setGroupList] = useState<groupDetailType[]>([]);
-
-  useEffect(() => {
-    getGroups(userDetails.entityId);
-  }, []);
 
   useEffect(() => {
     if (searchValue) {

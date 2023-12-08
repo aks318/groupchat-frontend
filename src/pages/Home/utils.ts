@@ -20,6 +20,10 @@ export const createGroup = async (groupName: string, entityId: string) => {
       type: HOME_SET_MY_ALL_GROUP,
       payload: [res.data.data.groupData],
     });
+    store.dispatch({
+      type: HOME_SET_ALL_GROUP,
+      payload: [res.data.data.groupData],
+    });
   } catch (error) {
     console.log(error);
   }

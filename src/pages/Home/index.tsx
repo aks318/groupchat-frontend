@@ -1,16 +1,26 @@
 import { Box } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tab from "./Tab";
 import { useDispatch, useSelector } from "react-redux";
 import MyGroup from "./MyGroup/MyGroup";
 import AllGroup from "./AllGroup/AllGroup";
 import Searchbar from "Component/Searchbar";
 import { HOME_SET_TAB } from "store/homeReducer/homeConstants";
+import { getAllmygroup, getGroups } from "./utils";
 
 const Home = () => {
-  const { tab } = useSelector((state: AppState) => state.homeReducer);
+  const { userDetails } = useSelector((state: AppState) => state.authReducer);
+  const { tab, myAllGroup, allGroup } = useSelector(
+    (state: AppState) => state.homeReducer
+  );
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!myAllGroup.length) getAllmygroup(userDetails.entityId);
+    if (!allGroup.length) getGroups(userDetails.entityId);
+  }, []);
+
   const handleChange = (value: string) => {
     setSearchValue(value);
   };

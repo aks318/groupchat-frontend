@@ -7,7 +7,6 @@ import DialogBox from "Layout/DialogBox/DialogBox";
 import Home1 from "Images/home1.svg";
 
 import { theme } from "Utils/theme";
-import { getAllmygroup } from "../utils";
 import NewGroup from "./NewGroup";
 import GroupBox from "../GroupBox";
 
@@ -19,10 +18,6 @@ const MyGroup = ({ searchValue }: Props) => {
   const { myAllGroup } = useSelector((state: AppState) => state.homeReducer);
   const [groupList, setGroupList] = useState<groupDetailType[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
-
-  useEffect(() => {
-    if (!myAllGroup.length) getAllmygroup(userDetails.entityId);
-  }, []);
 
   useEffect(() => {
     if (searchValue) {

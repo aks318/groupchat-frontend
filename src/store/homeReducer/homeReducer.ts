@@ -24,10 +24,10 @@ const homeReducer = (
       return { ...state, tab: action.payload };
     }
     case HOME_SET_MY_ALL_GROUP: {
-      return { ...state, myAllGroup: [...state.myAllGroup, ...action.payload] };
+      return { ...state, myAllGroup: [...action.payload, ...state.myAllGroup] };
     }
     case HOME_SET_ALL_GROUP: {
-      return { ...state, allGroup: action.payload };
+      return { ...state, allGroup: [...action.payload, ...state.allGroup] };
     }
     case HOME_SET_GROUP_DETAIL: {
       return { ...state, groupDetail: action.payload };
