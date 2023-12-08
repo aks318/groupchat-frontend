@@ -6,7 +6,7 @@ import Chat1 from "Images/chat1.svg";
 import { theme } from "Utils/theme";
 import { useEffect, useState } from "react";
 import Detail from "./Detail/Detail";
-import { getPeopleProfile } from "./utils";
+import { getAllGroupChat, getPeopleProfile } from "./utils";
 
 const Chat = () => {
   const { groupDetail } = useSelector((state: AppState) => state.homeReducer);
@@ -14,6 +14,7 @@ const Chat = () => {
   useEffect(() => {
     if (JSON.stringify(groupDetail) !== "{}") {
       getPeopleProfile(groupDetail.people);
+      getAllGroupChat(groupDetail.entityId);
     }
   }, []);
   if (JSON.stringify(groupDetail) === "{}") {

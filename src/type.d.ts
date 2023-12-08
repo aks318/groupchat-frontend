@@ -33,8 +33,17 @@ interface homeStateType {
   groupDetail: groupDetailType;
 }
 
+interface chatDataType {
+  groupEntityId: string;
+  userEntityid: string;
+  chat: string;
+  date: string;
+  entityId: string;
+}
+
 interface chatStateType {
   peopleProfile: userDetailsType[];
+  chatData: chatDataType[];
 }
 
 interface AppState {
