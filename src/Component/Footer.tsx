@@ -2,9 +2,14 @@ import { Box } from "@mui/material";
 import { clearStore } from "Utils/clearStore";
 import { navLinklist } from "Utils/navLinks";
 import { theme } from "Utils/theme";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { socket } from "socket";
+import { HOME_SET_ALL_GROUP } from "store/homeReducer/homeConstants";
 
 const Footer = () => {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -20,6 +25,17 @@ const Footer = () => {
       }
     }
   };
+
+  useEffect(() => {
+    socket.on("newGroup", (data) => {
+      const groupData = JSON.parse(data);
+      console.log(groupData);
+      dispatch({
+        type: HOME_SET_ALL_GROUP,
+        payload: [groupData],
+      });
+    });
+  }, []);
 
   return (
     <Box sx={{ backgroundColor: theme.bg.blue.secondary, display: "flex" }}>
