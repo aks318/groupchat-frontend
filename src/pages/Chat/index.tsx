@@ -7,6 +7,7 @@ import { theme } from "Utils/theme";
 import { useEffect, useState } from "react";
 import Detail from "./Detail/Detail";
 import { getAllGroupChat, getPeopleProfile } from "./utils";
+import ChatWindow from "./ChatWindow/ChatWindow";
 
 const Chat = () => {
   const { groupDetail } = useSelector((state: AppState) => state.homeReducer);
@@ -64,7 +65,14 @@ const Chat = () => {
         detailActive={detailActive}
         handleDetailActive={handleDetailActive}
       />
-      {detailActive ? <Detail /> : <InputBox />}
+      {detailActive ? (
+        <Detail />
+      ) : (
+        <>
+          <ChatWindow />
+          <InputBox />
+        </>
+      )}
     </Box>
   );
 };
