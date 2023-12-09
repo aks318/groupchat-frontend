@@ -1,6 +1,7 @@
 import {
   CHAT_ADD_PEOPLE_PROFILES,
   CHAT_SET_PEOPLE_PROFILES,
+  CLEAR_CHAT_DATA,
   CLEAR_CHAT_STATE,
   SET_CHAT_DATA,
 } from "./chatConstants";
@@ -27,7 +28,12 @@ const chatReducer = (
         ...state,
         chatData: [...state.chatData, ...action.payload],
       };
-    case CLEAR_CHAT_STATE:
+
+    case CLEAR_CHAT_DATA:
+      return {
+        ...state,
+        chatData: [],
+      };
       return initialState;
     default:
       return state;

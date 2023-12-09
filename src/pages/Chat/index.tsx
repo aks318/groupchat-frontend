@@ -1,22 +1,29 @@
 import { Box, Typography } from "@mui/material";
 import Header from "./Header";
 import InputBox from "./InputBox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Chat1 from "Images/chat1.svg";
 import { theme } from "Utils/theme";
 import { useEffect, useState } from "react";
 import Detail from "./Detail/Detail";
 import { getAllGroupChat, getPeopleProfile } from "./utils";
 import ChatWindow from "./ChatWindow/ChatWindow";
+import { CLEAR_CHAT_DATA } from "store/chatReducer/chatConstants";
 
 const Chat = () => {
   const { groupDetail } = useSelector((state: AppState) => state.homeReducer);
   const [detailActive, setDetailActive] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (JSON.stringify(groupDetail) !== "{}") {
       getPeopleProfile(groupDetail.people);
       getAllGroupChat(groupDetail.entityId);
     }
+    return () => {
+      dispatch({
+        type: CLEAR_CHAT_DATA,
+      });
+    };
   }, []);
   if (JSON.stringify(groupDetail) === "{}") {
     return (
