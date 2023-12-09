@@ -57,13 +57,15 @@ export const getPeopleProfile = async (entityIdList: string[]) => {
 export const sendChat = async (
   groupEntityId: string,
   userEntityid: string,
-  chat: string
+  chat: string,
+  entityIdList: string[]
 ) => {
   try {
     const res = await API.post("chat/sendChat", {
       groupEntityId,
       userEntityid,
       chat,
+      entityIdList,
     });
     store.dispatch({
       type: SET_CHAT_DATA,

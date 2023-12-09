@@ -15,8 +15,16 @@ const InputBox = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSendChat = async () => {
+    const entityIdList = groupDetail.people.filter(
+      (entityId) => entityId !== userDetails.entityId
+    );
     setLoading(true);
-    await sendChat(groupDetail.entityId, userDetails.entityId, chat);
+    await sendChat(
+      groupDetail.entityId,
+      userDetails.entityId,
+      chat,
+      entityIdList
+    );
     setLoading(false);
     setChat("");
   };

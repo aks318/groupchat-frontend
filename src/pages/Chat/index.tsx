@@ -8,7 +8,11 @@ import { useEffect, useState } from "react";
 import Detail from "./Detail/Detail";
 import { getAllGroupChat, getPeopleProfile } from "./utils";
 import ChatWindow from "./ChatWindow/ChatWindow";
-import { CLEAR_CHAT_DATA } from "store/chatReducer/chatConstants";
+import {
+  CLEAR_CHAT_DATA,
+  SET_CHAT_DATA,
+} from "store/chatReducer/chatConstants";
+import { socket } from "socket";
 
 const Chat = () => {
   const { groupDetail } = useSelector((state: AppState) => state.homeReducer);
@@ -23,6 +27,19 @@ const Chat = () => {
       dispatch({
         type: CLEAR_CHAT_DATA,
       });
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("newChat", (data) => {
+      const chatData = JSON.parse(data);
+      dispatch({
+        type: SET_CHAT_DATA,
+        payload: [chatData],
+      });
+    });
+    return () => {
+      socket.off("newChat");
     };
   }, []);
   if (JSON.stringify(groupDetail) === "{}") {
